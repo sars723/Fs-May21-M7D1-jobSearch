@@ -3,6 +3,12 @@ import { useState } from "react";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 export const MyNavbar = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchCategory, setSearchCategory] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.setSearchCategory(searchCategory);
+  };
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand href="#home">Job Search Engine</Navbar.Brand>
@@ -19,9 +25,24 @@ export const MyNavbar = (props) => {
         />
         <Button
           variant="outline-info"
-          onclick={props.setSearchQuery(searchQuery)}
+          onClick={props.setSearchQuery(searchQuery)}
         >
-          Search
+          Search with title
+        </Button>
+      </Form>
+      <Form inline className="ml-5" /* onSubmit={handleSubmit} */>
+        <FormControl
+          type="text"
+          placeholder="Search"
+          className="mr-sm-2"
+          value={searchCategory}
+          onChange={(e) => setSearchCategory(e.target.value)}
+        />
+        <Button
+          variant="outline-info"
+          onClick={props.setSearchCategory(searchCategory)}
+        >
+          Search with Category
         </Button>
       </Form>
     </Navbar>
